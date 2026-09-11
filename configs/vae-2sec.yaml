@@ -1,0 +1,49 @@
+experiment_name: "vae-2sec"
+model_configs:
+    vae_configs:
+        data_channel: 3
+        input_shape: [8, 90, 120]
+        channels: [ 64, 128, 256, 512]
+        strides:  [ 2, 2, 2]
+        temporal_strides: [ 2, 2, 2]
+        output_shape: null
+        skip_layer: 1
+        full_temporal_dim: false
+        no_temporal_kernel: false
+        use_avgpool: false
+        use_residual: true
+        use_spectralnorm: false
+        do_avgpool: true
+        post_downsample: false
+        use_film: []
+        hyp_dim: null
+        upsample_method: 'trilinear'
+        use_residual_dec: true
+        use_batchnorm_on_latent: false
+        use_spectralnorm_on_latent: false
+        trainable_prior: false
+    lr: 0.001
+    use_cosine_lr: false
+    T_max: null
+    use_halfprecision: false
+    loss_coef_instructions:
+        recon_loss:
+            value: 1
+        kld_loss:
+            value: 0.005
+data_configs:
+    data_dir: ???
+    num_workers: 8
+    batch_size: 64
+    seq_len: 8
+    frame_step: 4
+    steps_ahead: 0
+    pred_start: 0
+accumulate_grad_batches: 1
+max_epochs: 500
+num_sanity_val_steps: 0
+val_check_interval: 1000
+limit_val_batches: 100
+resume_ckpt_path: null
+checkpoint_epoch: 1
+gpus: "0, 1, 2"
